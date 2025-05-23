@@ -7,62 +7,70 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Parâmetros da Simulação da Lava</h1>
-    <div id="area_simulacao">
-        <canvas id="canvasSimulador" width="800" height="300">
-            Seu navegador não suporta o elemento Canvas.
-        </canvas>
-    </div>
-    <fieldset id="equationParams">
-        <legend>Defina a Equação: y = A * (B - C<sup>t</sup>)</legend>
-        <div>
-            <label for="paramA">Valor de A:</label>
-            <input type="number" id="paramA" value="7.0" step="0.1">
+    <main>
+        <section>
+            <h1>Parâmetros da Simulação da Lava</h1>
+            <div id="area_simulacao">
+            <canvas id="canvasSimulador" width="800" height="300">
+                Seu navegador não suporta o elemento Canvas.
+            </canvas>
         </div>
-        <div>
-            <label for="paramB">Valor de B:</label>
-            <input type="number" id="paramB" value="2.0" step="0.1">
-        </div>
-        <div>
-            <label for="paramC">Valor de C:</label>
-            <input type="number" id="paramC" value="0.9" step="0.01" min="0.01">
-        </div>
-        <div>
-            <label for="lava">Valor de t :</label>
-            <input type="number" id="lava" value="10" step="1" min="1">
-        </div>
-    </fieldset>
-    <div id="equationDisplay">
-        <h2>Equação Atual:</h2>
-        <p id="formattedEquation">y = 7.0 * (2.0 - 0.9<sup>t</sup>)</p>
-    </div>
-    <div id="simulationControls">
-        <button id="iniciar">Iniciar Simulação</button>
-    </div>
-    <div 
-        <h2>Resultados da Simulação:</h2>
-        <p id="resultado">A simulação ainda não foi iniciada.</p>
-
-        <details>
-            <summary>Código em python</summary>
-             <pre>
-            import math
-            tempoAtual = 0.0
-            posicaoAtualLava = 7.0
-            posicaoAlvoLava = 10.0
-            passoTempoh = 0.0001
-            fatorAnegativo = -7.0
-            baseCexponencial = 0.9
-            logaritmoNaturalC = math.log(baseCexponencial)
-            while posicaoAtualLava < posicaoAlvoLava:
-                #                  y= 7.0×(2.0 - 0.9t)
-                #                  y= 7.0×2.0−7.0×0.9×t
-                taxaVariacaoLavadydt = fatorAnegativo * baseCexponencial ** tempoAtual * logaritmoNaturalC
-                posicaoAtualLava = posicaoAtualLava + passoTempoh * taxaVariacaoLavadydt
-                tempoAtual = tempoAtual + passoTempoh
-            print("Tempo calculado: " + str(tempoAtual))
-        </pre>
-        </details>
+        </section>
+        <section class="section-row">
+            <fieldset id="equationParams">
+            <legend>Defina a Equação: y = A * (B - C<sup>t</sup>)</legend>
+            <div>
+                <label for="paramA">Valor de A:</label>
+                <input type="number" id="paramA" value="7.0" step="0.1">
+            </div>
+            <div>
+                <label for="paramB">Valor de B:</label>
+                <input type="number" id="paramB" value="2.0" step="0.1">
+            </div>
+            <div>
+                <label for="paramC">Valor de C:</label>
+                <input type="number" id="paramC" value="0.9" step="0.01" min="0.01">
+            </div>
+            <div>
+                <label for="lava">Valor de t :</label>
+                <input type="number" id="lava" value="10" step="1" min="1">
+            </div>
+        </fieldset>
+        <div id="simulationControls">
+                <button id="iniciar">Iniciar Simulação</button>
+            </div>
+        <div id="equationDisplay">
+                <h2>Equação Atual:</h2>
+                <p id="formattedEquation">y = 7.0 * (2.0 - 0.9<sup>t</sup>)</p>
+                <h3>Resultados da Simulação:</h3>
+                <p id="resultado">A simulação ainda não foi iniciada.</p>
+            </div>
+        </section>
+        <section>
+            <details>
+                    <summary>Código em python</summary>
+                    <pre>
+                    import math
+                    tempoAtual = 0.0
+                    posicaoAtualLava = 7.0
+                    posicaoAlvoLava = 10.0
+                    passoTempoh = 0.0001
+                    fatorAnegativo = -7.0
+                    baseCexponencial = 0.9
+                    logaritmoNaturalC = math.log(baseCexponencial)
+                    while posicaoAtualLava < posicaoAlvoLava:
+                        #                  y= 7.0×(2.0 - 0.9t)
+                        #                  y= 7.0×2.0−7.0×0.9×t
+                        taxaVariacaoLavadydt = fatorAnegativo * baseCexponencial ** tempoAtual * logaritmoNaturalC
+                        posicaoAtualLava = posicaoAtualLava + passoTempoh * taxaVariacaoLavadydt
+                        tempoAtual = tempoAtual + passoTempoh
+                    print("Tempo calculado: " + str(tempoAtual))
+                </pre>
+                </details>
+        </section>
+        
+    </main>
+    
        
     <script src="js/main.js" type="module"></script>
 </body>
