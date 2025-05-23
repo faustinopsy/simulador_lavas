@@ -2,13 +2,17 @@ export default class DesenhoCanvas {
     constructor(canvasId) {
         this.canvas = canvasId;
         this.ctx = this.canvas.getContext('2d');
-        this.desenharChao();
-        this.desenharCeu();
         this.centroVulcao = 220;
         this.baseY = 250;
         this.larguraBase = 200;
         this.altura = 100;
-        this.desenharVulcao() 
+
+        this.larguraCasa = 80;
+        this.alturaCasa = 60;
+        this.alturaTeto = 50;
+        this.distanciVulcao = this.centroVulcao + 500;
+        this.posicaoY = 190;
+        
     }
 
     desenharCeu() {
@@ -34,5 +38,32 @@ export default class DesenhoCanvas {
         this.ctx.fill();
     }
 
+    desenharVila() {
+        if (!this.ctx) return;
+
+        this.ctx.fillStyle = '#3F9977';
+        this.ctx.fillRect(this.distanciVulcao, this.posicaoY, this.larguraCasa, this.alturaCasa);
+        this.ctx.fillStyle = '#8F0077';
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.distanciVulcao, this.posicaoY);
+        this.ctx.lineTo(this.distanciVulcao + this.larguraCasa / 2, this.posicaoY - this.alturaTeto);
+        this.ctx.lineTo(this.distanciVulcao + this.larguraCasa, this.posicaoY);
+        this.ctx.closePath();
+        this.ctx.fill();
+    }
+
+    limparCanvas() {
+        if (!this.ctx) return;
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
+    desenhar() {
+        if (!this.ctx) return;
+        this.limparCanvas();
+        this.desenharCeu();
+        this.desenharChao();
+        this.desenharVulcao();
+        this.desenharVila();
+    }
    
 }

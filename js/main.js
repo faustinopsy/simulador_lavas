@@ -9,3 +9,4 @@ const input = new Inputs();
 input.capturarValores(equacao.calcularTempoLavaEuler.bind(equacao));
 
 const desenho = new DesenhoCanvas(canvas);
+desenho.desenhar();
