@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuração da Equação da Lava</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>Parâmetros da Simulação da Lava</h1>
+    <fieldset id="equationParams">
+        <legend>Defina a Equação: y = A * (B - C<sup>t</sup>)</legend>
+        <div>
+            <label for="paramA">Valor de A:</label>
+            <input type="number" id="paramA" value="7.0" step="0.1">
+        </div>
+        <div>
+            <label for="paramB">Valor de B:</label>
+            <input type="number" id="paramB" value="2.0" step="0.1">
+        </div>
+        <div>
+            <label for="paramC">Valor de C (0 &lt; C &lt; 1 idealmente):</label>
+            <input type="number" id="paramC" value="0.9" step="0.01" min="0.01">
+        </div>
+    </fieldset>
+    <div id="equationDisplay">
+        <h2>Equação Atual:</h2>
+        <p id="formattedEquation">y = 7.0 * (2.0 - 0.9<sup>t</sup>)</p>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
