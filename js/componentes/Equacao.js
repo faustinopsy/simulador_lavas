@@ -1,6 +1,6 @@
 export default class Equacao{
     constructor(){
-        this.resultado = document.getElementById("resultado");
+        this.resultadoDisplay = document.getElementById("resultado");
     }
 
     calcularTempoLavaEuler(a, b, c, d) {
@@ -34,7 +34,7 @@ export default class Equacao{
         if (iteracoes >= maxIteracoes) {
             this.resultadoDisplay.innerHTML = `Cálculo interrompido (limite de iterações). t=${tempoAtual.toFixed(4)}`;
         } else {
-            this.resultadoDisplay.innerHTML = `Tempo para atingir ${alvo.toFixed(2)}: ${tempoAtual.toFixed(4)} horas`;
+            this.resultadoDisplay.innerHTML = `Tempo para atingir ${posicaoAlvoLava.toFixed(2)}: ${tempoAtual.toFixed(4)} horas`;
         }
     }
 }
