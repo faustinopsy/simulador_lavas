@@ -14,7 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
             resultado.innerHTML = "valores inválidos.";
             return;
         }
-        resultado.innerHTML = a + b + c
+        // y = 7.0 * (2.0 - 0.9t)
+        resultado.innerHTML = a * ( b - c )
     });
 
 });
