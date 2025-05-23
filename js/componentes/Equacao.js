@@ -13,6 +13,9 @@ export default class Equacao{
         let baseCexponencial;
         let taxaVariacaoLavadydt;
 
+        let maxIteracoes = 5000000;
+        let iteracoes = 0;
+
         tempoAtual = 0.0;
         posicaoAtualLava = a;
         posicaoAlvoLava = d;
@@ -21,12 +24,17 @@ export default class Equacao{
         baseCexponencial = c;
         logaritmoNaturalC = Math.log(baseCexponencial);
         resultado.innerHTML = 'Calculando...'
-        while (posicaoAtualLava < posicaoAlvoLava) {
+        while (posicaoAtualLava < posicaoAlvoLava && iteracoes < maxIteracoes) {
             taxaVariacaoLavadydt = fatorAnegativo * Math.pow(baseCexponencial, tempoAtual) * logaritmoNaturalC;
             posicaoAtualLava = posicaoAtualLava + passoTempoh * taxaVariacaoLavadydt;
             tempoAtual = tempoAtual + passoTempoh;
+            iteracoes++;
         }
 
-        this.resultado.innerHTML = tempoAtual
+        if (iteracoes >= maxIteracoes) {
+            this.resultadoDisplay.innerHTML = `Cálculo interrompido (limite de iterações). t=${tempoAtual.toFixed(4)}`;
+        } else {
+            this.resultadoDisplay.innerHTML = `Tempo para atingir ${alvo.toFixed(2)}: ${tempoAtual.toFixed(4)} horas`;
+        }
     }
 }
