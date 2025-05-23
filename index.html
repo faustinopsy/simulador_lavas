@@ -37,6 +37,28 @@
     <div 
         <h2>Resultados da Simulação:</h2>
         <p id="resultado">A simulação ainda não foi iniciada.</p>
+
+        <details>
+            <summary>Código em python</summary>
+             <pre>
+            import math
+            tempoAtual = 0.0
+            posicaoAtualLava = 7.0
+            posicaoAlvoLava = 10.0
+            passoTempoh = 0.0001
+            fatorAnegativo = -7.0
+            baseCexponencial = 0.9
+            logaritmoNaturalC = math.log(baseCexponencial)
+            while posicaoAtualLava < posicaoAlvoLava:
+                #                  y= 7.0×(2.0 - 0.9t)
+                #                  y= 7.0×2.0−7.0×0.9×t
+                taxaVariacaoLavadydt = fatorAnegativo * baseCexponencial ** tempoAtual * logaritmoNaturalC
+                posicaoAtualLava = posicaoAtualLava + passoTempoh * taxaVariacaoLavadydt
+                tempoAtual = tempoAtual + passoTempoh
+            print("Tempo calculado: " + str(tempoAtual))
+        </pre>
+        </details>
+       
     <script src="js/main.js" type="module"></script>
 </body>
 </html>
