@@ -1,15 +1,13 @@
-class Inputs {
-  constructor(calcularTempoLavaEuler) {
+export default class Inputs {
+  constructor() {
     this.parametroA = document.getElementById("paramA");
     this.parametroB = document.getElementById("paramB");
     this.parametroC = document.getElementById("paramC");
     this.resultado = document.getElementById("resultado");
     this.calcularBtn = document.getElementById("iniciar");
     this.lava = document.getElementById("lava");
-   this.calcularTempoLavaEuler = calcularTempoLavaEuler
-    this.capturarValores();
   }
-  capturarValores() {
+  capturarValores(calcularTempoLavaEuler) {
     this.calcularBtn.addEventListener("click", () => {
       this.resultado.innerHTML = "";
       const a = parseFloat(this.parametroA.value);
@@ -20,7 +18,8 @@ class Inputs {
         this.resultado.innerHTML = "valores inválidos.";
         return;
       }
-      this.calcularTempoLavaEuler(a, b, c, d);
+      
+      calcularTempoLavaEuler(a, b, c, d);
     });
   }
 

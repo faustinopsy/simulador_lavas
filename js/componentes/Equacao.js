@@ -1,14 +1,9 @@
-class Equacao{
-    constructor(a, b, c, d){
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.d = d;
+export default class Equacao{
+    constructor(){
         this.resultado = document.getElementById("resultado");
     }
 
-    calcularTempoLavaEuler() {
-
+    calcularTempoLavaEuler(a, b, c, d) {
         let tempoAtual;
         let posicaoAtualLava;
         let posicaoAlvoLava;
@@ -19,11 +14,11 @@ class Equacao{
         let taxaVariacaoLavadydt;
 
         tempoAtual = 0.0;
-        posicaoAtualLava = this.a;
-        posicaoAlvoLava = lava;
+        posicaoAtualLava = a;
+        posicaoAlvoLava = d;
         passoTempoh = 0.0001;
-        fatorAnegativo = -1 * this.a;
-        baseCexponencial = this.c;
+        fatorAnegativo = -1 * a;
+        baseCexponencial = c;
         logaritmoNaturalC = Math.log(baseCexponencial);
         resultado.innerHTML = 'Calculando...'
         while (posicaoAtualLava < posicaoAlvoLava) {
