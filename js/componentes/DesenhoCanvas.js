@@ -4,6 +4,11 @@ export default class DesenhoCanvas {
         this.ctx = this.canvas.getContext('2d');
         this.desenharChao();
         this.desenharCeu();
+        this.centroVulcao = 220;
+        this.baseY = 250;
+        this.larguraBase = 200;
+        this.altura = 100;
+        this.desenharVulcao() 
     }
 
     desenharCeu() {
@@ -18,6 +23,16 @@ export default class DesenhoCanvas {
         this.ctx.fillRect(0, 250, this.canvas.width, 200);
     }
 
+    desenharVulcao() {
+        if (!this.ctx) return;
+        this.ctx.fillStyle = '#654321';
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.centroVulcao - this.larguraBase , this.baseY);
+        this.ctx.lineTo(this.centroVulcao, this.altura);
+        this.ctx.lineTo(this.centroVulcao + this.larguraBase , this.baseY);
+        this.ctx.closePath();
+        this.ctx.fill();
+    }
 
    
 }
