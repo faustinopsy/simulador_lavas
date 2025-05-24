@@ -145,6 +145,10 @@ export default class DesenhoCanvas {
         this.desenhar();
         this.resultadoDisplay.innerHTML = `Tempo: ${objeto.tempoAtual.toFixed(2)}`;
         this.statusDisplay.innerHTML = `Tempo: ${objeto.tempoAtual.toFixed(2)} horas`;
+        document.querySelector('.cloud-2').style.transform = `translateX(${this.desenhaLavaDescendo * 100}%)`;
+        document.querySelector('.cloud-2').style.transform = `translateX(${this.progressoHorizontal * 400}%)`;
+        document.querySelector('.cloud').style.transform = `translateX(${this.desenhaLavaDescendo * 100}%)`;
+        document.querySelector('.cloud').style.transform = `translateX(${this.progressoHorizontal * 200}%)`;
         if (!objeto.rodando) {
             clearInterval(this.idIntervaloAnimacao);
             this.idIntervaloAnimacao = null;
