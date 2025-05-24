@@ -4,18 +4,23 @@ export default class DesenhoCanvas {
         this.ctx = this.canvas.getContext('2d');
         this.centroVulcao = 220;
         this.baseY = 250;
-        this.larguraBase = 200; 
-        this.altura = 100; 
+        this.larguraBaseOffset = 200;
+        this.alturaPicoY = 100;
 
         this.larguraCasa = 80;
         this.alturaCasa = 60;
         this.alturaTeto = 50;
         this.posicaoXVila = this.centroVulcao + 500;
-        this.posicaoYCasaTopo = 190; 
+        this.posicaoYCasaTopo = 190;
         
-        this.larguraTopoFluxoLava = 20; 
-        this.larguraBaseFluxoLavaNaEncosta = 30; 
-        this.espessuraLavaHorizontal = 25; 
+        this.larguraTopoFluxoLava = 20;
+        this.larguraBaseFluxoLavaNaEncosta = 30;
+        this.espessuraLavaHorizontal = 25;
+
+        this.progressoDescida = 0;
+        this.idIntervaloAnimacao = null; 
+        this.velocidade = 0.02;
+        this.faseAnimacao = 'parada'; 
     }
 
     desenharCeu() {
@@ -34,9 +39,9 @@ export default class DesenhoCanvas {
         if (!this.ctx) return;
         this.ctx.fillStyle = '#654321';
         this.ctx.beginPath();
-        this.ctx.moveTo(this.centroVulcao - this.larguraBase, this.baseY);
-        this.ctx.lineTo(this.centroVulcao, this.altura);
-        this.ctx.lineTo(this.centroVulcao + this.larguraBase, this.baseY);
+        this.ctx.moveTo(this.centroVulcao - this.larguraBaseOffset, this.baseY);
+        this.ctx.lineTo(this.centroVulcao, this.alturaPicoY);
+        this.ctx.lineTo(this.centroVulcao + this.larguraBaseOffset, this.baseY);
         this.ctx.closePath();
         this.ctx.fill();
     }
@@ -55,34 +60,47 @@ export default class DesenhoCanvas {
     }
 
     desenhaLavaDescendo() {
-        if (!this.ctx) return;
+        if (!this.ctx || this.progressoDescida <= 0) return;
+
         this.ctx.fillStyle = 'orangered';
         this.ctx.beginPath();
-        const pontoPicoX = this.centroVulcao;
-        const pontoPicoY = this.altura;
-        const pontoBaseDireitaVulcaoX = this.centroVulcao + this.larguraBase;
-        const pontoBaseDireitaVulcaoY = this.baseY;
-        this.ctx.moveTo(pontoPicoX - this.larguraTopoFluxoLava / 2, pontoPicoY);
-        this.ctx.lineTo(pontoPicoX + this.larguraTopoFluxoLava / 2, pontoPicoY);
-        this.ctx.lineTo(pontoBaseDireitaVulcaoX, pontoBaseDireitaVulcaoY);
-        this.ctx.lineTo(pontoBaseDireitaVulcaoX - this.larguraBaseFluxoLavaNaEncosta, pontoBaseDireitaVulcaoY);
+        const pPicoX = this.centroVulcao;
+        const pPicoY = this.alturaPicoY;
+        const pBaseDireitaVulcaoX = this.centroVulcao + this.larguraBaseOffset;
+        const pBaseDireitaVulcaoY = this.baseY;
+        const yAtualLava = pPicoY + (pBaseDireitaVulcaoY - pPicoY) * this.progressoDescida;
+        const xInterpDireita = pPicoX + (pBaseDireitaVulcaoX - pPicoX) * this.progressoDescida;
+        const larguraAtualFluxo = this.larguraTopoFluxoLava + 
+                                (this.larguraBaseFluxoLavaNaEncosta - this.larguraTopoFluxoLava) * this.progressoDescida;
+
+        const xTopoFluxoEsq = pPicoX - this.larguraTopoFluxoLava / 2;
+        const xTopoFluxoDir = pPicoX + this.larguraTopoFluxoLava / 2;
+        const xBaseFluxoDirAtual = xInterpDireita; 
+        const xBaseFluxoEsqAtual = xInterpDireita - larguraAtualFluxo;
+
+        this.ctx.moveTo(xTopoFluxoEsq, pPicoY);
+        this.ctx.lineTo(xTopoFluxoDir, pPicoY);
+        this.ctx.lineTo(xBaseFluxoDirAtual, yAtualLava);
+        this.ctx.lineTo(xBaseFluxoEsqAtual, yAtualLava);
+        
         this.ctx.closePath();
         this.ctx.fill();
     }
-
+    
     desenhaLavaChao() {
-        if (!this.ctx) return;
+        if (!this.ctx || this.progressoDescida < 1 || this.progressoHorizontal <=0) return;
 
-        const xInicioLavaHorizontal = this.centroVulcao + this.larguraBase - this.larguraBaseFluxoLavaNaEncosta;
-        const xFimLavaHorizontal = this.posicaoXVila;
-        const larguraLavaHorizontal = xFimLavaHorizontal - xInicioLavaHorizontal;
+        const xInicio = (this.centroVulcao + this.larguraBaseOffset) - this.larguraBaseFluxoLavaNaEncosta;
+        const xFimTotal = this.posicaoXVila;
+        const comprimentoTotal = xFimTotal - xInicio;
+        const comprimentoAtual = comprimentoTotal * this.progressoHorizontal;
 
-        if (larguraLavaHorizontal > 0) {
-            this.ctx.fillStyle = 'orangered';
+        if (comprimentoAtual > 0) {
+            this.ctx.fillStyle = 'red';
             this.ctx.fillRect(
-                xInicioLavaHorizontal,
+                xInicio,
                 this.baseY - this.espessuraLavaHorizontal,
-                larguraLavaHorizontal,
+                comprimentoAtual,
                 this.espessuraLavaHorizontal
             );
         }
@@ -101,6 +119,51 @@ export default class DesenhoCanvas {
         this.desenharVulcao();
         this.desenharVila();
         this.desenhaLavaDescendo();
-        this.desenhaLavaChao();
+        this.desenhaLavaChao(); 
+    }
+
+    atualizaAnimacao() {
+        let pararIntervaloLocal = false;
+
+        if (this.faseAnimacao === 'descendo') {
+            this.progressoDescida += this.velocidade;
+            if (this.progressoDescida >= 1) {
+                this.progressoDescida = 1;
+                this.faseAnimacao = 'horizontal';
+            }
+        } else if (this.faseAnimacao === 'horizontal') {
+            this.progressoHorizontal += this.velocidade;
+            if (this.progressoHorizontal >= 1) {
+                this.progressoHorizontal = 1;
+                this.faseAnimacao = 'concluida';
+                pararIntervaloLocal = true;
+            }
+        }
+        
+        this.desenhar();
+
+        if (pararIntervaloLocal) {
+            clearInterval(this.idIntervaloAnimacao);
+            this.idIntervaloAnimacao = null;
+        }
+    }
+
+    iniciarAnimacaoLava() {
+        if (this.idIntervaloAnimacao) return; 
+        this.progressoDescida = 0;
+        this.progressoHorizontal = 0;
+        this.faseAnimacao = 'descendo';
+        this.desenhar(); 
+        this.idIntervaloAnimacao = setInterval(() => {
+            this.atualizaAnimacao();
+        }, 50); 
+    }
+
+    pararAnimacaoLava() {
+         if (this.idIntervaloAnimacao) {
+            clearInterval(this.idIntervaloAnimacao);
+            this.idIntervaloAnimacao = null;
+            this.faseAnimacao = 'parada';
+        }
     }
 }
