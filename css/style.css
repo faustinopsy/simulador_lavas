@@ -66,3 +66,9 @@ pre{
     overflow-x: auto;
     white-space: pre-wrap;
 }
+summary{
+    border: red solid 3px;
+    background: black;
+    color: white;
+    font-size: 1.5rem;
+}
