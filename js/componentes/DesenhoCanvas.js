@@ -1,6 +1,7 @@
 export default class DesenhoCanvas {
     constructor(canvasId) {
         this.canvas = canvasId;
+        this.resultadoDisplay = document.getElementById("resultado");
         this.ctx = this.canvas.getContext('2d');
         this.centroVulcao = 220;
         this.baseY = 250;
@@ -96,7 +97,7 @@ export default class DesenhoCanvas {
         const comprimentoAtual = comprimentoTotal * this.progressoHorizontal;
 
         if (comprimentoAtual > 0) {
-            this.ctx.fillStyle = 'red';
+            this.ctx.fillStyle = 'orangered';
             this.ctx.fillRect(
                 xInicio,
                 this.baseY - this.espessuraLavaHorizontal,
@@ -122,7 +123,7 @@ export default class DesenhoCanvas {
         this.desenhaLavaChao(); 
     }
 
-    atualizaAnimacao() {
+    atualizaAnimacao(objeto) {
         let pararIntervaloLocal = false;
 
         if (this.faseAnimacao === 'descendo') {
@@ -141,22 +142,27 @@ export default class DesenhoCanvas {
         }
         
         this.desenhar();
-
+        this.resultadoDisplay.innerHTML = 'Calculando...'
         if (pararIntervaloLocal) {
             clearInterval(this.idIntervaloAnimacao);
             this.idIntervaloAnimacao = null;
-        }
+            this.resultadoDisplay.innerHTML = `Tempo para atingir ${objeto.posicaoAlvoLava.toFixed(2)}: ${objeto.tempoAtual.toFixed(4)} horas`;
+        }  
+        
     }
 
-    iniciarAnimacaoLava() {
+    iniciarAnimacaoLava(calcularTempoLavaEuler, d) {
+        let tempoAtual = d * 5;
+        let objeto = true
         if (this.idIntervaloAnimacao) return; 
         this.progressoDescida = 0;
         this.progressoHorizontal = 0;
         this.faseAnimacao = 'descendo';
         this.desenhar(); 
+        objeto = calcularTempoLavaEuler();
         this.idIntervaloAnimacao = setInterval(() => {
-            this.atualizaAnimacao();
-        }, 50); 
+          this.atualizaAnimacao(objeto);
+        }, tempoAtual); 
     }
 
     pararAnimacaoLava() {

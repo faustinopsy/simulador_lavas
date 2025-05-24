@@ -7,7 +7,7 @@ export default class Inputs {
     this.calcularBtn = document.getElementById("iniciar");
     this.lava = document.getElementById("lava");
   }
-  capturarValores(calcularTempoLavaEuler, iniciarAnimacaoLava) {
+  capturarValores(iniciavariaveis, calcularTempoLavaEuler, iniciarAnimacaoLava) {
     this.calcularBtn.addEventListener("click", () => {
       this.resultado.innerHTML = "";
       const a = parseFloat(this.parametroA.value);
@@ -18,8 +18,9 @@ export default class Inputs {
         this.resultado.innerHTML = "valores inválidos.";
         return;
       }
-        iniciarAnimacaoLava();
-        calcularTempoLavaEuler(a, b, c, d);
+        iniciavariaveis(a, b, c, d)
+        iniciarAnimacaoLava(calcularTempoLavaEuler, d);
+        
     });
   }
 

@@ -9,7 +9,7 @@ desenho.desenhar();
 const equacao = new Equacao();
 const input = new Inputs();
 input.capturarValores( 
+    equacao.iniciaVariaveis.bind(equacao),
     equacao.calcularTempoLavaEuler.bind(equacao),
     desenho.iniciarAnimacaoLava.bind(desenho)
-    
 );

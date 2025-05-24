@@ -1,40 +1,64 @@
 export default class Equacao{
     constructor(){
-        this.resultadoDisplay = document.getElementById("resultado");
+        this.tempoAtual;
+        this.posicaoAtualLava;
+        this.posicaoAlvoLava;
+        this.passoTempoh;
+        this.logaritmoNaturalC;
+        this.fatorAnegativo;
+        this.baseCexponencial;
+        this.taxaVariacaoLavadydt;
+
+        this.maxIteracoes = 5000000;
+        this.iteracoes = 0;
     }
 
-    calcularTempoLavaEuler(a, b, c, d) {
-        let tempoAtual;
-        let posicaoAtualLava;
-        let posicaoAlvoLava;
-        let passoTempoh;
-        let logaritmoNaturalC;
-        let fatorAnegativo;
-        let baseCexponencial;
-        let taxaVariacaoLavadydt;
+    iniciaVariaveis(a, b, c, d){
+        this.tempoAtual = 0.0;
+        this.posicaoAtualLava = a;
+        this.posicaoAlvoLava = d;
+        this.passoTempoh = 0.0001;
+        this.fatorAnegativo = -1 * a;
+        this.baseCexponencial = c;
+        this.logaritmoNaturalC = Math.log(this.baseCexponencial);
+    }
 
-        let maxIteracoes = 5000000;
-        let iteracoes = 0;
+    calcularTempoLavaEuler() {
+        // let tempoAtual;
+        // let posicaoAtualLava;
+        // let posicaoAlvoLava;
+        // let passoTempoh;
+        // let logaritmoNaturalC;
+        // let fatorAnegativo;
+        // let baseCexponencial;
+        // let taxaVariacaoLavadydt;
 
-        tempoAtual = 0.0;
-        posicaoAtualLava = a;
-        posicaoAlvoLava = d;
-        passoTempoh = 0.0001;
-        fatorAnegativo = -1 * a;
-        baseCexponencial = c;
-        logaritmoNaturalC = Math.log(baseCexponencial);
-        resultado.innerHTML = 'Calculando...'
-        while (posicaoAtualLava < posicaoAlvoLava && iteracoes < maxIteracoes) {
-            taxaVariacaoLavadydt = fatorAnegativo * Math.pow(baseCexponencial, tempoAtual) * logaritmoNaturalC;
-            posicaoAtualLava = posicaoAtualLava + passoTempoh * taxaVariacaoLavadydt;
-            tempoAtual = tempoAtual + passoTempoh;
-            iteracoes++;
+        // let maxIteracoes = 5000000;
+        // let iteracoes = 0;
+
+        
+        
+        while (this.posicaoAtualLava < this.posicaoAlvoLava && this.iteracoes < this.maxIteracoes) {
+            this.taxaVariacaoLavadydt = this.fatorAnegativo * Math.pow(this.baseCexponencial, this.tempoAtual) * this.logaritmoNaturalC;
+            this.posicaoAtualLava = this.posicaoAtualLava + this.passoTempoh * this.taxaVariacaoLavadydt;
+            this.tempoAtual = this.tempoAtual + this.passoTempoh;
+            this.iteracoes++;
         }
-
-        if (iteracoes >= maxIteracoes) {
-            this.resultadoDisplay.innerHTML = `Cálculo interrompido (limite de iterações). t=${tempoAtual.toFixed(4)}`;
-        } else {
-            this.resultadoDisplay.innerHTML = `Tempo para atingir ${posicaoAlvoLava.toFixed(2)}: ${tempoAtual.toFixed(4)} horas`;
+        
+        if (this.iteracoes >= this.maxIteracoes) {
+            return {
+                "rodando": false,
+                "tempoAtual": this.tempoAtual,
+                "posicaoAlvoLava": this.posicaoAtualLava
+            }
+        } 
+        else {
+            return {
+                "rodando": true,
+                "tempoAtual": this.tempoAtual,
+                "posicaoAlvoLava": this.posicaoAtualLava
+            }
         }
+       
     }
 }
