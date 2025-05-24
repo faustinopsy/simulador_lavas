@@ -91,6 +91,18 @@ summary{
     position: relative;
     width: 48px;
 }
+
+.cloud-2 {
+    top: 165px;
+    left: 165px;
+    background-color: #FFF;
+    border-radius: 48px;
+    display: inline-block;
+    height: 16px;
+    position: absolute;
+    width: 48px;
+}
+
 .cloud::before {
     background-color: rgb(255, 255, 255);
     border-radius: 50%;
@@ -112,6 +124,35 @@ summary{
     width: 14px;
 }
 .cloud::after {
+    background-color: rgb(255, 255, 255);
+    height: 23px;
+    left: 7px;
+    right: auto;
+    top: -10px;
+    width: 23px;
+}
+
+.cloud-2::before {
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    content: '';
+    height: 18px;
+    position: absolute;
+    right: 7px;
+    top: 0px;
+    width: 14px;
+}
+.cloud-2::before, .cloud-2::after {
+    background-color: rgb(255, 242, 242);
+    border-radius: 50%;
+    content: '';
+    height: 14px;
+    position: absolute;
+    right: 7px;
+    top: -6px;
+    width: 14px;
+}
+.cloud-2::after {
     background-color: rgb(255, 255, 255);
     height: 23px;
     left: 7px;

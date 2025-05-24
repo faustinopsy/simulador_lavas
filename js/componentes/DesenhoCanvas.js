@@ -143,9 +143,9 @@ export default class DesenhoCanvas {
         }
         
         this.desenhar();
-        this.resultadoDisplay.innerHTML = 'Calculando...'
-        this.statusDisplay.innerHTML = `Tempo: ${objeto.tempoAtual}`;
-        if (objeto.rodando === false) {
+        this.resultadoDisplay.innerHTML = `Tempo: ${objeto.tempoAtual.toFixed(2)}`;
+        this.statusDisplay.innerHTML = `Tempo: ${objeto.tempoAtual.toFixed(2)} horas`;
+        if (!objeto.rodando) {
             clearInterval(this.idIntervaloAnimacao);
             this.idIntervaloAnimacao = null;
             this.resultadoDisplay.innerHTML = `Tempo para atingir ${objeto.posicaoAlvoLava.toFixed(2)}: ${objeto.tempoAtual.toFixed(4)} horas`;
@@ -156,7 +156,7 @@ export default class DesenhoCanvas {
     iniciarAnimacaoLava(calcularTempoLavaEuler, b, d) {
         let tempoAtual = d * -50;
         let objeto = true
-        this.velocidade = b / 1000;
+        this.velocidade = b / 370;
         if (this.idIntervaloAnimacao) return; 
         this.progressoDescida = 0;
         this.progressoHorizontal = 0;
