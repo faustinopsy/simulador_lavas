@@ -2,6 +2,7 @@ export default class DesenhoCanvas {
     constructor(canvasId) {
         this.canvas = canvasId;
         this.resultadoDisplay = document.getElementById("resultado");
+        this.statusDisplay = document.getElementById('status');
         this.ctx = this.canvas.getContext('2d');
         this.centroVulcao = 220;
         this.baseY = 250;
@@ -143,7 +144,8 @@ export default class DesenhoCanvas {
         
         this.desenhar();
         this.resultadoDisplay.innerHTML = 'Calculando...'
-        if (pararIntervaloLocal) {
+        this.statusDisplay.innerHTML = `Tempo: ${objeto.tempoAtual}`;
+        if (objeto.rodando === false) {
             clearInterval(this.idIntervaloAnimacao);
             this.idIntervaloAnimacao = null;
             this.resultadoDisplay.innerHTML = `Tempo para atingir ${objeto.posicaoAlvoLava.toFixed(2)}: ${objeto.tempoAtual.toFixed(4)} horas`;
@@ -151,16 +153,18 @@ export default class DesenhoCanvas {
         
     }
 
-    iniciarAnimacaoLava(calcularTempoLavaEuler, d) {
-        let tempoAtual = d * 5;
+    iniciarAnimacaoLava(calcularTempoLavaEuler, b, d) {
+        let tempoAtual = d * -50;
         let objeto = true
+        this.velocidade = b / 1000;
         if (this.idIntervaloAnimacao) return; 
         this.progressoDescida = 0;
         this.progressoHorizontal = 0;
         this.faseAnimacao = 'descendo';
         this.desenhar(); 
-        objeto = calcularTempoLavaEuler();
+        
         this.idIntervaloAnimacao = setInterval(() => {
+          objeto = calcularTempoLavaEuler();
           this.atualizaAnimacao(objeto);
         }, tempoAtual); 
     }

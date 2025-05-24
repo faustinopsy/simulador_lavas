@@ -72,3 +72,50 @@ summary{
     color: white;
     font-size: 1.5rem;
 }
+
+#status{
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 25px;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.1);
+}
+.cloud {
+    background-color: #FFF;
+    border-radius: 48px;
+    display: inline-block;
+    height: 16px;
+    position: relative;
+    width: 48px;
+}
+.cloud::before {
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    content: '';
+    height: 18px;
+    position: absolute;
+    right: 7px;
+    top: 0px;
+    width: 14px;
+}
+.cloud::before, .cloud::after {
+    background-color: rgb(255, 242, 242);
+    border-radius: 50%;
+    content: '';
+    height: 14px;
+    position: absolute;
+    right: 7px;
+    top: -6px;
+    width: 14px;
+}
+.cloud::after {
+    background-color: rgb(255, 255, 255);
+    height: 23px;
+    left: 7px;
+    right: auto;
+    top: -10px;
+    width: 23px;
+}

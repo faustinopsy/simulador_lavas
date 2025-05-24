@@ -19,7 +19,7 @@ export default class Inputs {
         return;
       }
         iniciavariaveis(a, b, c, d)
-        iniciarAnimacaoLava(calcularTempoLavaEuler, d);
+        iniciarAnimacaoLava(calcularTempoLavaEuler, b, d);
         
     });
   }
