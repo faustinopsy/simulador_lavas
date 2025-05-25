@@ -160,7 +160,7 @@ export default class DesenhoCanvas {
     iniciarAnimacaoLava(calcularTempoLavaEuler, b, d) {
         let tempoAtual = d * -50;
         let objeto = true
-        this.velocidade = b / 370;
+        this.velocidade = b / 770;
         if (this.idIntervaloAnimacao) return; 
         this.progressoDescida = 0;
         this.progressoHorizontal = 0;
