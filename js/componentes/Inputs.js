@@ -5,10 +5,13 @@ export default class Inputs {
     this.parametroC = document.getElementById("paramC");
     this.resultado = document.getElementById("resultado");
     this.calcularBtn = document.getElementById("iniciar");
+    this.reinicarBtn = document.getElementById("reiniciar");
     this.lava = document.getElementById("lava");
   }
   capturarValores(iniciavariaveis, calcularTempoLavaEuler, iniciarAnimacaoLava) {
     this.calcularBtn.addEventListener("click", () => {
+      this.calcularBtn.style.display = "none";
+      this.reinicarBtn.style.display = "block";
       this.resultado.innerHTML = "";
       const a = parseFloat(this.parametroA.value);
       const b = parseFloat(this.parametroB.value);
@@ -22,6 +25,10 @@ export default class Inputs {
         iniciarAnimacaoLava(calcularTempoLavaEuler, b, d);
         
     });
+
+    this.reinicarBtn.addEventListener("click", () => {
+        location.reload();
+    })
   }
 
   render() {

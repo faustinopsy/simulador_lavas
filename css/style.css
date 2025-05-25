@@ -160,3 +160,7 @@ summary{
     top: -10px;
     width: 23px;
 }
+
+.hidden {
+    display: none;
+}
