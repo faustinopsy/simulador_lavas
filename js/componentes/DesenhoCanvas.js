@@ -143,8 +143,8 @@ export default class DesenhoCanvas {
         }
         
         this.desenhar();
-        this.resultadoDisplay.innerHTML = `Tempo: ${objeto.tempoAtual.toFixed(4)}`;
-        this.statusDisplay.innerHTML = `Tempo: ${objeto.tempoAtual.toFixed(4)} horas`;
+       
+        
         document.querySelector('.cloud-2').style.transform = `translateX(${this.desenhaLavaDescendo * 100}%)`;
         document.querySelector('.cloud-2').style.transform = `translateX(${this.progressoHorizontal * 400}%)`;
         document.querySelector('.cloud').style.transform = `translateX(${this.desenhaLavaDescendo * 100}%)`;
@@ -152,7 +152,7 @@ export default class DesenhoCanvas {
         if (!objeto.rodando) {
             clearInterval(this.idIntervaloAnimacao);
             this.idIntervaloAnimacao = null;
-            this.resultadoDisplay.innerHTML = `Tempo para atingir ${objeto.posicaoAlvoLava.toFixed(2)}: ${objeto.tempoAtual.toFixed(4)} horas`;
+            this.resultadoDisplay.innerHTML = `${objeto.tempoAtual.toFixed(4)} horas para atingir ${objeto.posicaoAlvoLava.toFixed(2)} Milhas`;
         }  
         
     }
