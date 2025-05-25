@@ -90,6 +90,7 @@ summary{
     height: 16px;
     position: relative;
     width: 48px;
+    box-shadow: 0px 11px 7px 1px rgb(39 20 20 / 22%);
 }
 
 .cloud-2 {
@@ -101,6 +102,7 @@ summary{
     height: 16px;
     position: absolute;
     width: 48px;
+    box-shadow: 0px 11px 7px 1px rgb(39 20 20 / 22%);
 }
 
 .cloud::before {
