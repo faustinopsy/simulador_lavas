@@ -161,6 +161,7 @@ export default class DesenhoCanvas {
         let tempoAtual = d * -50;
         let objeto = true
         this.velocidade = b / 370;
+        this.posicaoXVila = d * 50;
         if (this.idIntervaloAnimacao) return; 
         this.progressoDescida = 0;
         this.progressoHorizontal = 0;

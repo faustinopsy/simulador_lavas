@@ -32,7 +32,7 @@ export default class Equacao{
             this.iteracoes++;
        }
         
-        if (this.posicaoAtualLava > this.posicaoAlvoLava && this.iteracoes > this.maxIteracoes) {
+        if (this.posicaoAtualLava > this.posicaoAlvoLava) {
             return {
                 "rodando": false,
                 "tempoAtual": this.tempoAtual,
