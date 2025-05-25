@@ -12,7 +12,7 @@ export default class DesenhoCanvas {
         this.larguraCasa = 80;
         this.alturaCasa = 60;
         this.alturaTeto = 50;
-        this.posicaoXVila = this.centroVulcao + 500;
+        this.posicaoXVila = 10 * 50;
         this.posicaoYCasaTopo = 190;
         
         this.larguraTopoFluxoLava = 20;
@@ -157,11 +157,15 @@ export default class DesenhoCanvas {
         
     }
 
+    posicaoAlvoLava(valor) {
+        this.posicaoXVila = valor * 50;
+        this.limparCanvas();
+        this.desenhar();
+    }
     iniciarAnimacaoLava(calcularTempoLavaEuler, b, d) {
         let tempoAtual = d * -50;
         let objeto = true
         this.velocidade = b / 370;
-        this.posicaoXVila = d * 50;
         if (this.idIntervaloAnimacao) return; 
         this.progressoDescida = 0;
         this.progressoHorizontal = 0;

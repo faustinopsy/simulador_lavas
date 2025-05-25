@@ -8,7 +8,7 @@ export default class Inputs {
     this.reinicarBtn = document.getElementById("reiniciar");
     this.lava = document.getElementById("lava");
   }
-  capturarValores(iniciavariaveis, calcularTempoLavaEuler, iniciarAnimacaoLava) {
+  capturarValores(iniciavariaveis, calcularTempoLavaEuler, iniciarAnimacaoLava, posicaoAlvoLava) {
     this.calcularBtn.addEventListener("click", () => {
       this.calcularBtn.style.display = "none";
       this.reinicarBtn.style.display = "block";
@@ -29,8 +29,11 @@ export default class Inputs {
     this.reinicarBtn.addEventListener("click", () => {
         location.reload();
     })
+    this.lava.addEventListener("change", (e) => {
+      posicaoAlvoLava(e.target.value);
+      
+  });
   }
-
   render() {
     return this.input;
   }

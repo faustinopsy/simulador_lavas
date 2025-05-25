@@ -11,5 +11,6 @@ const input = new Inputs();
 input.capturarValores( 
     equacao.iniciaVariaveis.bind(equacao),
     equacao.calcularTempoLavaEuler.bind(equacao),
-    desenho.iniciarAnimacaoLava.bind(desenho)
+    desenho.iniciarAnimacaoLava.bind(desenho),
+    desenho.posicaoAlvoLava.bind(desenho)
 );
