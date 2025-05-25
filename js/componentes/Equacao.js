@@ -17,7 +17,7 @@ export default class Equacao{
         this.tempoAtual = 0.0;
         this.posicaoAtualLava = a;
         this.posicaoAlvoLava = d;
-        this.passoTempoh = b / 370;
+        this.passoTempoh = d / 1070;
         this.fatorAnegativo = -1 * a;
         this.baseCexponencial = c;
         this.logaritmoNaturalC = Math.log(this.baseCexponencial);

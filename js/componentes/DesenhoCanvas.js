@@ -118,8 +118,8 @@ export default class DesenhoCanvas {
         this.limparCanvas();
         this.desenharCeu();
         this.desenharChao();
-        this.desenharVulcao();
         this.desenharVila();
+        this.desenharVulcao();
         this.desenhaLavaDescendo();
         this.desenhaLavaChao(); 
     }
@@ -160,7 +160,7 @@ export default class DesenhoCanvas {
     iniciarAnimacaoLava(calcularTempoLavaEuler, b, d) {
         let tempoAtual = d * -50;
         let objeto = true
-        this.velocidade = b / 770;
+        this.velocidade = b / 370;
         if (this.idIntervaloAnimacao) return; 
         this.progressoDescida = 0;
         this.progressoHorizontal = 0;
